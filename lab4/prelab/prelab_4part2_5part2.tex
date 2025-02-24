@@ -1,0 +1,389 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./prelab_4part2_5part2_images/} }
+
+\begin{document}
+
+\begin{matlabcode}
+% preparation
+% 4.2 a)
+M = 1 / 17.13;
+K_p = 2.46*M;
+A = [0 1;0 -1/M];
+B = [0;K_p/M];
+C = [1 0];
+D = 0;
+
+T = 0.1;
+
+[A_d, B_d] =  c2d(A,B,T)
+\end{matlabcode}
+\begin{matlaboutput}
+A_d = 2x2    
+    1.0000    0.0479
+         0    0.1803
+
+B_d = 2x1    
+    0.0075
+    0.1177
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% 4.2 b)
+Qc = [B A*B]
+\end{matlabcode}
+\begin{matlaboutput}
+Qc = 2x2    
+         0    2.4600
+    2.4600  -42.1398
+
+\end{matlaboutput}
+\begin{matlabcode}
+rank_Qc = rank(Qc)
+\end{matlabcode}
+\begin{matlaboutput}
+rank_Qc = 2
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% 4.2 c)
+Qo = [C;C*A]
+\end{matlabcode}
+\begin{matlaboutput}
+Qo = 2x2    
+     1     0
+     0     1
+
+\end{matlaboutput}
+\begin{matlabcode}
+rank_Qo = rank(Qo)
+\end{matlabcode}
+\begin{matlaboutput}
+rank_Qo = 2
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% 4.2 d)
+K_d = acker(A_d, B_d,[0.3, 0.4])
+\end{matlabcode}
+\begin{matlaboutput}
+K_d = 1x2    
+   35.6804    1.8104
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% 4.2 e)
+L_d = (acker(A_d.', C.', [0.3, 0.4])).'
+\end{matlabcode}
+\begin{matlaboutput}
+L_d = 2x1    
+    0.4803
+    0.5494
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+Ad_hat_100  = A_d - L_d*C
+\end{matlabcode}
+\begin{matlaboutput}
+Ad_hat_100 = 2x2    
+    0.5197    0.0479
+   -0.5494    0.1803
+
+\end{matlaboutput}
+\begin{matlabcode}
+Bd_hat_100 = [B_d L_d]
+\end{matlabcode}
+\begin{matlaboutput}
+Bd_hat_100 = 2x2    
+    0.0075    0.4803
+    0.1177    0.5494
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% 4.2 f)
+% DIGITAL CONTROLLERS
+% controller for T = 100ms is seen above
+% T = 10ms
+T=0.01;
+[A_d_10, B_d_10] =  c2d(A,B,T);
+K_d_10 = acker(A_d_10, B_d_10,[0.3, 0.4])
+\end{matlabcode}
+\begin{matlaboutput}
+K_d_10 = 1x2    
+1.0e+03 *
+
+    1.8577    0.0410
+
+\end{matlaboutput}
+\begin{matlabcode}
+L_d_10 = (acker(A_d_10.', C.', [0.3, 0.4])).'
+\end{matlabcode}
+\begin{matlaboutput}
+L_d_10 = 2x1    
+    1.1426
+   26.1277
+
+\end{matlaboutput}
+\begin{matlabcode}
+Ad_hat_10  = A_d_10 - L_d_10*C
+\end{matlabcode}
+\begin{matlaboutput}
+Ad_hat_10 = 2x2    
+   -0.1426    0.0092
+  -26.1277    0.8426
+
+\end{matlaboutput}
+\begin{matlabcode}
+Bd_hat_10 = [B_d_10 L_d_10]
+\end{matlabcode}
+\begin{matlaboutput}
+Bd_hat_10 = 2x2    
+    0.0001    1.1426
+    0.0226   26.1277
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% T = 20ms
+T=0.02;
+[A_d_20, B_d_20] =  c2d(A,B,T);
+K_d_20 = acker(A_d_20, B_d_20,[0.3, 0.4])
+\end{matlabcode}
+\begin{matlaboutput}
+K_d_20 = 1x2    
+  504.1119   18.9151
+
+\end{matlaboutput}
+\begin{matlabcode}
+L_d_20 = (acker(A_d_20.', C.', [0.3, 0.4])).'
+\end{matlabcode}
+\begin{matlaboutput}
+L_d_20 = 2x1    
+    1.0099
+    7.5023
+
+\end{matlaboutput}
+\begin{matlabcode}
+Ad_hat_20  = A_d_20 - L_d_20*C
+\end{matlabcode}
+\begin{matlaboutput}
+Ad_hat_20 = 2x2    
+   -0.0099    0.0169
+   -7.5023    0.7099
+
+\end{matlaboutput}
+\begin{matlabcode}
+Bd_hat_20 = [B_d_20 L_d_20]
+\end{matlabcode}
+\begin{matlaboutput}
+Bd_hat_20 = 2x2    
+    0.0004    1.0099
+    0.0417    7.5023
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% T = 50ms
+T=0.05;
+[A_d_50, B_d_50] =  c2d(A,B,T);
+K_d_50 = acker(A_d_50, B_d_50,[0.3, 0.4])
+\end{matlabcode}
+\begin{matlaboutput}
+K_d_50 = 1x2    
+  101.6638    5.8702
+
+\end{matlaboutput}
+\begin{matlabcode}
+L_d_50 = (acker(A_d_50.', C.', [0.3, 0.4])).'
+\end{matlabcode}
+\begin{matlaboutput}
+L_d_50 = 2x1    
+    0.7246
+    0.0915
+
+\end{matlaboutput}
+\begin{matlabcode}
+Ad_hat_50  = A_d_50 - L_d_50*C
+\end{matlabcode}
+\begin{matlaboutput}
+Ad_hat_50 = 2x2    
+    0.2754    0.0336
+   -0.0915    0.4246
+
+\end{matlaboutput}
+\begin{matlabcode}
+Bd_hat_50 = [B_d_50 L_d_50]
+\end{matlabcode}
+\begin{matlaboutput}
+Bd_hat_50 = 2x2    
+    0.0024    0.7246
+    0.0826    0.0915
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% CONTINUOUS-TIME CONTROLLERS
+K_ct = acker(A, B, [0.3, 0.4])
+\end{matlabcode}
+\begin{matlaboutput}
+K_ct = 1x2    
+    0.0488   -7.2480
+
+\end{matlaboutput}
+\begin{matlabcode}
+L_ct = (acker(A.', C.', [0.3 0.4])).'
+\end{matlabcode}
+\begin{matlaboutput}
+L_ct = 2x1    
+  -17.8300
+  305.5479
+
+\end{matlaboutput}
+\begin{matlabcode}
+% discretizing the observer
+% Euler discretization scheme
+T=0.1;
+A_hat  = A - L_ct*C;
+B_hat = [B L_ct];
+A_d_hat = eye(2) + T*A_hat
+\end{matlabcode}
+\begin{matlaboutput}
+A_d_hat = 2x2    
+    2.7830    0.1000
+  -30.5548   -0.7130
+
+\end{matlaboutput}
+\begin{matlabcode}
+B_d_hat = T*B_hat
+\end{matlabcode}
+\begin{matlaboutput}
+B_d_hat = 2x2    
+         0   -1.7830
+    0.2460   30.5548
+
+\end{matlaboutput}
+\begin{matlabcode}
+C_d_hat = eye(2)
+\end{matlabcode}
+\begin{matlaboutput}
+C_d_hat = 2x2    
+     1     0
+     0     1
+
+\end{matlaboutput}
+\begin{matlabcode}
+D_d_hat = [0 0; 0 0]
+\end{matlabcode}
+\begin{matlaboutput}
+D_d_hat = 2x2    
+     0     0
+     0     0
+
+\end{matlaboutput}
+
+
+\begin{matlabcode}
+% discretizing the controller
+clear tf
+tf = tf(K_ct, 1)
+\end{matlabcode}
+\begin{matlaboutput}
+tf =
+ 
+  0.04878 s - 7.248
+ 
+Continuous-time transfer function.
+\end{matlaboutput}
+\begin{matlabcode}
+K_d_ct = c2d(tf, T, 'tustin')
+\end{matlabcode}
+\begin{matlaboutput}
+K_d_ct =
+ 
+  -6.272 z - 8.224
+  ----------------
+       z + 1
+ 
+Sample time: 0.1 seconds
+Discrete-time transfer function.
+\end{matlaboutput}
+\begin{matlabcode}
+A_hat_ct = A - B*K_ct;
+A_d_hat_ct = eye(2) + T*A_hat_ct
+\end{matlabcode}
+\begin{matlaboutput}
+A_d_hat_ct = 2x2    
+    1.0000    0.1000
+   -0.0120    1.0700
+
+\end{matlaboutput}
+\begin{matlabcode}
+B_hat_ct = [0 ;0];
+[num, den] = ss2tf(A_hat_ct, B, C, D)
+\end{matlabcode}
+\begin{matlaboutput}
+num = 1x3    
+         0         0    2.4600
+
+den = 1x3    
+    1.0000   -0.7000    0.1200
+
+\end{matlaboutput}
+\begin{matlabcode}
+clear tf
+tf = tf(num, den)
+\end{matlabcode}
+\begin{matlaboutput}
+tf =
+ 
+         2.46
+  ------------------
+  s^2 - 0.7 s + 0.12
+ 
+Continuous-time transfer function.
+\end{matlaboutput}
+\begin{matlabcode}
+C_ct = c2d(tf, T, 'tustin')
+\end{matlabcode}
+\begin{matlaboutput}
+C_ct =
+ 
+  0.006371 z^2 + 0.01274 z + 0.006371
+  -----------------------------------
+         z^2 - 2.071 z + 1.073
+ 
+Sample time: 0.1 seconds
+Discrete-time transfer function.
+\end{matlaboutput}
+
+\end{document}
